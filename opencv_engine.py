@@ -2,8 +2,7 @@ import cv2
 import sys
 import time
 
-error = 0
-
+count = 0
 class HaarClassifier:
     def __init__(self):
         self.faceCascade = cv2.CascadeClassifier('data/haarcascade_frontalface_default.xml')
@@ -12,6 +11,7 @@ class HaarClassifier:
         scaleFactor = 1.2
         minNeighbors = 5
         faces = self.faceCascade.detectMultiScale(grayFrame, scaleFactor, minNeighbors)
+
         for (x, y, w, h) in faces:
             outlined_image = cv2.rectangle(outputFrame, (x, y), (x + w, y + h), (0, 255, 0), 2)
             cv2.putText(outlined_image, 'Face', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,255,0), 2)
@@ -27,8 +27,7 @@ class Recognition:
         if cap.isOpened():
             return cap
         else:
-            print("'[ ERROR ] FAILED TO LOAD. CHECK YOUR CODE OR CURRENT PYTHON LIBRARIES.'")
-            error += 1
+            print("[ ERROR ] FAILED TO LOAD. CHECK YOUR CODE OR CURRENT PYTHON LIBRARIES.")
             sys.exit()
 
     def start(self):
@@ -43,6 +42,12 @@ class Recognition:
                     self.haarClassifier.detectFace(grayScale, img)
 
                     cv2.imshow('img', img)
+
+                    #if (len(faces) != 0):
+                    #    count +=  1
+                    #    print('jest dobrze')
+                    #    print(count)
+
                     k = cv2.waitKey(1)
                     if k == ord('q'):
                         print('[ WARN ] PROGRAM SHUTDOWN ...')
