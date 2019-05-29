@@ -1,5 +1,8 @@
 import cv2
 import sys
+import time
+
+error = 0
 
 class HaarClassifier:
     def __init__(self):
@@ -21,29 +24,35 @@ class Recognition:
     def capture(self):
         cap = cv2.VideoCapture(0) #0 for online camera
 
-
-        try:
-            if cap.isOpened():
-                return cap
-            else:
-                print("Failed to load")
-                sys.exit()
-        except:
-            print('Failed to load')
+        if cap.isOpened():
+            return cap
+        else:
+            print("'[ ERROR ] FAILED TO LOAD. CHECK YOUR CODE OR CURRENT PYTHON LIBRARIES.'")
+            error += 1
+            sys.exit()
 
     def start(self):
         cap = self.capture()
-        while True:
-            ret, img = cap.read()
-            if ret:
-                grayScale = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        print('[ WARN ] PRESS Q TO SHUTDOWN PROGRAM')
+        try:
+            while True:
+                ret, img = cap.read()
+                if ret:
+                    grayScale = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-                self.haarClassifier.detectFace(grayScale, img)
+                    self.haarClassifier.detectFace(grayScale, img)
 
-                cv2.imshow('img', img)
-                k = cv2.waitKey(1)
-                if k == ord('q'):
-                    break
+                    cv2.imshow('img', img)
+                    k = cv2.waitKey(1)
+                    if k == ord('q'):
+                        print('[ WARN ] PROGRAM SHUTDOWN ...')
+                        time.sleep(.5)
+                        print('[ EXIT ]')
+                        time.sleep(.9)
+                        break
+        except:
+            print('[ ERROR ] PROGRAM SHUTDOWN. CHECK YOUR CODE OR CURRENT PYTHON LIBRARIES.')
+            sys.exit()
 
         cap.release()
         cv2.destroyAllWindows()
