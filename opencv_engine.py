@@ -8,7 +8,7 @@ class HaarClassifier:
         self.faceCascade = cv2.CascadeClassifier('data/haarcascade_frontalface_default.xml')
 
     def detectFace(self, grayFrame, outputFrame):
-        scaleFactor = 1.2
+        scaleFactor = 1.05
         minNeighbors = 5
         faces = self.faceCascade.detectMultiScale(grayFrame, scaleFactor, minNeighbors)
 
@@ -27,7 +27,7 @@ class Recognition:
         if cap.isOpened():
             return cap
         else:
-            print("[ ERROR ] FAILED TO LOAD. CHECK YOUR CODE OR CURRENT PYTHON LIBRARIES.")
+            print("[ ERROR ] FAILED TO qqLOAD. CHECK YOUR CODE OR CURRENT PYTHON LIBRARIES.")
             sys.exit()
 
     def start(self):
