@@ -2,21 +2,11 @@ import cv2
 import sys
 import time
 
-count = 0
-class HaarClassifier:
-    def __init__(self):
-        self.faceCascade = cv2.CascadeClassifier('data/haarcascade_frontalface_default.xml')
+from search import search
+from classifier import HaarClassifier
 
-    def detectFace(self, grayFrame, outputFrame):
-        scaleFactor = 1.05
-        minNeighbors = 5
-        faces = self.faceCascade.detectMultiScale(grayFrame, scaleFactor, minNeighbors)
 
-        for (x, y, w, h) in faces:
-            outlined_image = cv2.rectangle(outputFrame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-            cv2.putText(outlined_image, 'Face', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,255,0), 2)
-
-class Recognition:
+class Recognition(HaarClassifier):
     def __init__(self):
         super().__init__()
         self.haarClassifier = HaarClassifier()
@@ -27,37 +17,33 @@ class Recognition:
         if cap.isOpened():
             return cap
         else:
-            print("[ ERROR ] FAILED TO qqLOAD. CHECK YOUR CODE OR CURRENT PYTHON LIBRARIES.")
+            print("[ ERROR ] FAILED TO LOAD. CHECK YOUR CODE OR CURRENT PYTHON LIBRARIES.")
             sys.exit()
 
     def start(self):
         cap = self.capture()
         print('[ WARN ] PRESS Q TO SHUTDOWN PROGRAM')
-        try:
-            while True:
-                ret, img = cap.read()
-                if ret:
-                    grayScale = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-                    self.haarClassifier.detectFace(grayScale, img)
+        while True:
+            ret, img = cap.read()
+            if ret:
+                grayScale = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-                    cv2.imshow('img', img)
+                self.haarClassifier.detectFace(grayScale, img)
 
-                    #if (len(faces) != 0):
-                    #    count +=  1
-                    #    print('jest dobrze')
-                    #    print(count)
+                cv2.imshow('img', img)
 
-                    k = cv2.waitKey(1)
-                    if k == ord('q'):
-                        print('[ WARN ] PROGRAM SHUTDOWN ...')
-                        time.sleep(.5)
-                        print('[ EXIT ]')
-                        time.sleep(.9)
-                        break
-        except:
-            print('[ ERROR ] PROGRAM SHUTDOWN. CHECK YOUR CODE OR CURRENT PYTHON LIBRARIES.')
-            sys.exit()
+
+                k = cv2.waitKey(1)
+                if k == ord('q'):
+                    print('[ WARN ] PROGRAM SHUTDOWN ...')
+                    time.sleep(.5)
+                    print('[ EXIT ]')
+                    time.sleep(.9)
+                    break
+
+        print('[ ERROR ] PROGRAM SHUTDOWN. CHECK YOUR CODE OR CURRENT PYTHON LIBRARIES.')
+        sys.exit()
 
         cap.release()
         cv2.destroyAllWindows()
