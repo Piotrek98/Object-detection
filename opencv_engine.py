@@ -24,26 +24,27 @@ class Recognition(HaarClassifier):
         cap = self.capture()
         print('[ WARN ] PRESS Q TO SHUTDOWN PROGRAM')
 
-        while True:
-            ret, img = cap.read()
-            if ret:
-                grayScale = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        try:
+            while True:
+                ret, img = cap.read()
+                if ret:
+                    grayScale = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-                self.haarClassifier.detectFace(grayScale, img)
+                    self.haarClassifier.detectFace(grayScale, img)
 
-                cv2.imshow('img', img)
+                    cv2.imshow('img', img)
 
 
-                k = cv2.waitKey(1)
-                if k == ord('q'):
-                    print('[ WARN ] PROGRAM SHUTDOWN ...')
-                    time.sleep(.5)
-                    print('[ EXIT ]')
-                    time.sleep(.9)
-                    break
-
-        print('[ ERROR ] PROGRAM SHUTDOWN. CHECK YOUR CODE OR CURRENT PYTHON LIBRARIES.')
-        sys.exit()
+                    k = cv2.waitKey(1)
+                    if k == ord('q'):
+                        print('[ WARN ] PROGRAM SHUTDOWN ...')
+                        time.sleep(.5)
+                        print('[ EXIT ]')
+                        time.sleep(.9)
+                        break
+        except:
+            print('[ ERROR ] PROGRAM SHUTDOWN. CHECK YOUR CODE OR CURRENT PYTHON LIBRARIES.')
+            sys.exit()
 
         cap.release()
         cv2.destroyAllWindows()
