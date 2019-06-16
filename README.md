@@ -16,6 +16,19 @@
   
   [OpenCV documentation](https://docs.opencv.org/3.0-beta/index.html)
   
+- **Wikipedia**
+  > pip install wikipedia
+  
+- **time**
+  > pip install time
+  
+  
+# How to start?
+  > command prompt
+    > python opencv_engine.py
+    
+    When the program detects an object, it will load information about this object from Wikipedia and display it in cmd
+  
 
     
 
