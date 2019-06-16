@@ -24,8 +24,8 @@
   
   
 # How to start?
-  > command prompt
-    > python opencv_engine.py
+
+  > python opencv_engine.py
     
     When the program detects an object, it will load information about this object from Wikipedia and display it in cmd
   
