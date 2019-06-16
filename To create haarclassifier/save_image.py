@@ -1,9 +1,9 @@
 import cv2
-vidcap = cv2.VideoCapture('face.mp4')
+vidcap = cv2.VideoCapture('...') #path to your video
 success,image = vidcap.read()
 count = 0
 while success:
-  cv2.imwrite("zdjęcie%d.jpg" % count, image)        
+  cv2.imwrite("image%d.jpg" % count, image)        
   success,image = vidcap.read()
-  print('Tworzenie nowego zdjęcia: ', success)
+  print('Create new image: ', success)
   count += 1
