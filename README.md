@@ -22,10 +22,13 @@
 - **time**
   > pip install time
   
+- **argparse**
+  > pip install argparse
+  
   
 # How to start?
 
-  > python opencv_engine.py
+  > python opencv_engine.py --camera 0
     
 When the program detects an object, it will load information about this object from Wikipedia and display it in cmd.
   
