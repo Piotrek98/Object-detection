@@ -5,8 +5,11 @@ import sys
 import time
 import argparse
 
-from search import search
-from classifier import HaarClassifier
+from face_classifier import HaarClassifier_face
+#from bird_classifier import HaarClassifier_bird
+#from car_classifier import HaarClassifier_car
+#from fullbody_classifier import HaarClassifier_fullbody
+#from wallclock_classifier import HaarClassifier_wallclock
 
 
 ap = argparse.ArgumentParser()
@@ -16,17 +19,26 @@ ap.add_argument("-c", "--camera", type=int, required = True,
 #        help = "Path to the image")
 args = vars(ap.parse_args())
 
-class Recognition(HaarClassifier):
+
+class Recognition():
     def __init__(self):
         super().__init__()
-        self.haarClassifier = HaarClassifier()
+        self.haarClassifier_face = HaarClassifier_face()
+        #self.haarClassifier_bird = HaarClassifier_bird()
+        #self.haarClassifier_car = HaarClassifier_car()
+        #self.haarClassifier_fullbody = HaarClassifier_fullbody()
+        #self.HaarClassifier_wallclock = HaarClassifier_wallclock()
+
+
 
     def capture(self):
-        cap = cv2.VideoCapture(args["camera"]) #0 for online camera
+        cap = cv2.VideoCapture(args["camera"]) # ["image"] for upload image in cmd
+
 
         if cap.isOpened():
             return cap
         else:
+
             print("[ ERROR ] FAILED TO LOAD. CHECK YOUR CODE OR CURRENT PYTHON LIBRARIES.")
             sys.exit()
 
@@ -40,10 +52,14 @@ class Recognition(HaarClassifier):
             if ret:
                 grayScale = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-                self.haarClassifier.detectFace(grayScale, img)
+                self.haarClassifier_face.detectFace(grayScale, img)
+                #self.haarClassifier_bird.detectBird(grayScale, img)
+                #self.haarClassifier_car.detectCar(grayScale, img)
+                #self.haarClassifier_fullbody.detectFullBody(grayScale, img)
+                #self.HaarClassifier_wallclock.detectWallClock(grayScale, img)
+
 
                 cv2.imshow('img', img)
-
 
                 k = cv2.waitKey(1)
                 if k == ord('q'):
