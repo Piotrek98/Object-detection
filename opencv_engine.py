@@ -5,11 +5,11 @@ import sys
 import time
 import argparse
 
-from face_classifier import HaarClassifier_face
-#from bird_classifier import HaarClassifier_bird
-#from car_classifier import HaarClassifier_car
-#from fullbody_classifier import HaarClassifier_fullbody
-#from wallclock_classifier import HaarClassifier_wallclock
+from HaarClassifier.face_classifier import HaarClassifier_face
+#from HaarClassifier.bird_classifier import HaarClassifier_bird
+#from HaarClassifier.car_classifier import HaarClassifier_car
+#from HaarClassifier.fullbody_classifier import HaarClassifier_fullbody
+#from HaarClassifier.wallclock_classifier import HaarClassifier_wallclock
 
 
 ap = argparse.ArgumentParser()
