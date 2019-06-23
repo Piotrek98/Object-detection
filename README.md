@@ -45,7 +45,7 @@ It's nothing problem.
   2. Record a long film without your object. We want only background. This film should have 2-3 minutes because we need a big database of negative images.
   3. In my repository, you find a program(save_image.py) which save every frame of film as a image. Change path in code source and run. Remember, do it in folder.
   
-  After all send my your xml file at my email: p.szewczyk-98@wp.pl
+  After all send me your xml file at my email: p.szewczyk-98@wp.pl
   
   Thank for all help!
 
